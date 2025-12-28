@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You received a corporate enquiry</title>
+    <style>
+         body {
+            font-family: 'Arial', sans-serif;
+            margin: 0 auto;
+            text-align: left; /* Align content to the left */
+            padding: 20px; /* Added padding for better appearance */
+        }
+        p {
+            margin: 10px 0;
+        }
+        footer {
+            margin-top: 10px;
+            color: #777777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Hello Admin,</p>
+        <p>You have received follwing information:</p>
+        <p><strong>Name:</strong> {{full_name}}</p>
+        <p><strong>Email:</strong> {{email}}</p>
+        <p><strong>Company:</strong> {{company}}</p>
+        <p><strong>Linked In:</strong> {{linkedin}}</p>
+        <p><strong>Message:</strong> {{message}}</p>
+    </div>
+    <footer>
+        <p>&nbsp;</p>
+        <p>Thanks and Regards</p>
+        <p>Kordie Team</p>
+    </footer>
+</body>
+</html>

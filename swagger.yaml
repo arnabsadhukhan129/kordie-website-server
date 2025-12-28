@@ -1,0 +1,596 @@
+openapi: 3.0.3
+info:
+  title: Custom Code Template API
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://localhost:3001/api/v1
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      description: Login
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: frankyross@yopmail.com
+                password:
+                  type: string
+                  example: '12345678'
+            examples:
+              Login:
+                value:
+                  email: frankyross@yopmail.com
+                  password: '12345678'
+      responses:
+        '200':
+          description: ''
+  /auth/verify-otp:
+    post:
+      tags:
+        - Auth
+      summary: Verify OTP
+      description: Verify OTP
+      operationId: verifyOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                otp:
+                  type: number
+                  example: 925998
+                token:
+                  type: string
+                  example: ABD96D1F31DFCEA5
+            examples:
+              Verify OTP:
+                value:
+                  otp: 925998
+                  token: ABD96D1F31DFCEA5
+      responses:
+        '200':
+          description: ''
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      description: Register
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirm_password:
+                  type: string
+                  example: '12345678'
+                email:
+                  type: string
+                  example: day@mailinator.com
+                first_name:
+                  type: string
+                  example: John
+                last_name:
+                  type: string
+                  example: Day
+                password:
+                  type: string
+                  example: '12345678'
+                phone:
+                  type: string
+                  example: '9865457898'
+            examples:
+              Register:
+                value:
+                  confirm_password: '12345678'
+                  email: day@mailinator.com
+                  first_name: John
+                  last_name: Day
+                  password: '12345678'
+                  phone: '9865457898'
+      responses:
+        '200':
+          description: ''
+  /auth/resend-otp:
+    post:
+      tags:
+        - Auth
+      summary: Resend OTP
+      description: Resend OTP
+      operationId: resendOtp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: 83E33B5BF9DDD3CD
+            examples:
+              Resend OTP:
+                value:
+                  token: 83E33B5BF9DDD3CD
+      responses:
+        '200':
+          description: ''
+  /auth/logout:
+    post:
+      tags:
+        - Auth
+      summary: Logout
+      description: Logout
+      operationId: logout
+      responses:
+        '200':
+          description: ''
+  /auth/admin:
+    post:
+      tags:
+        - Auth
+      summary: Admin Login
+      description: Admin Login
+      operationId: adminLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: '12345678'
+                username:
+                  type: string
+                  example: superadmin@mailinator.com
+            examples:
+              Admin Login:
+                value:
+                  password: '12345678'
+                  username: superadmin@mailinator.com
+      responses:
+        '200':
+          description: ''
+  /auth/forget-password:
+    post:
+      tags:
+        - Auth
+      summary: Forget Password
+      description: Forget Password
+      operationId: forgetPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: babai@mailinator.com
+            examples:
+              Forget Password:
+                value:
+                  email: babai@mailinator.com
+      responses:
+        '200':
+          description: ''
+  /auth/reset-password:
+    post:
+      tags:
+        - Auth
+      summary: Reset Password
+      description: Reset Password
+      operationId: resetPassword
+      parameters:
+        - name: x-reset-token
+          in: header
+          schema:
+            type: string
+            example: >-
+              51054cd5b3927994b917eb816628ab87203c495c0e1f2fd00f132caffa8809a53de7cef5cc0c14a5443d2ae662b0f332
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirm_password:
+                  type: string
+                  example: Admin@1234
+                new_password:
+                  type: string
+                  example: Admin@1234
+            examples:
+              Reset Password:
+                value:
+                  confirm_password: Admin@1234
+                  new_password: Admin@1234
+      responses:
+        '200':
+          description: ''
+  /auth/profile:
+    get:
+      tags:
+        - Auth
+      summary: My Profile
+      description: My Profile
+      operationId: myProfile
+      responses:
+        '200':
+          description: ''
+  /user:
+    get:
+      tags:
+        - User
+      summary: List Users
+      description: List Users
+      operationId: listUsers
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '10'
+      responses:
+        '200':
+          description: ''
+      security:
+        - bearerAuth: []
+  /user/get:
+    get:
+      tags:
+        - User
+      summary: Get User
+      description: Get User
+      operationId: getUser
+      parameters:
+        - name: x-mm-token
+          in: header
+          schema:
+            type: string
+            example: >-
+              eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQWdlbnQiOiJQb3N0bWFuUnVudGltZS83LjM2LjMiLCJkYXRlIjoiMjAyNC0wMi0yMFQxMTo1NzozMC4wODlaIiwiZGV2aWNlIjoiVyIsInVpZCI6IjJzNmYzYTl6NiIsInNpZ25hdHVyZSI6IjliMmRjZTY3ODJiN2ZhMGU5YzQ1NWI5YTNhNjMwMTZjNDNmOTBhYjIyODQ2ZjNhYjZhYjhhZDg4N2MwNjk3NTUiLCJpYXQiOjE3MDg0MzAyNTAsImV4cCI6MTcwODQzMzg1MH0.U59hrUxjEoaV2Nbrfs6ZN0t2ls8FmpQypslJr0jrz0A
+      responses:
+        '200':
+          description: Token Example Success
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: Origin, X-Requested-With, Content-Type, Accept, x-uid
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET, POST, OPTIONS, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '98'
+            Date:
+              schema:
+                type: string
+                example: Thu, 22 Feb 2024 10:13:58 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"62-s2O7SIbKGOc/LG+/VruSDry3AtE"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                            example: 1
+                          name:
+                            type: string
+                            example: No Name
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Yey! Working...
+                  status:
+                    type: number
+                    example: 200
+              examples:
+                Token Example Success:
+                  value:
+                    data:
+                      data:
+                        id: 1
+                        name: No Name
+                    error: false
+                    message: Yey! Working...
+                    status: 200
+        '403':
+          description: Get User Without X Token / Get User Token Expired
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: Origin, X-Requested-With, Content-Type, Accept, x-uid
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET, POST, OPTIONS, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '56'
+            Date:
+              schema:
+                type: string
+                example: Thu, 22 Feb 2024 10:13:32 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"38-25KVuQHF/LjOae2TOMzKQZwK3FA"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Not allowed without token.
+                  status:
+                    type: number
+                    example: 403
+              examples:
+                Get User Token Expired:
+                  value:
+                    error: true
+                    message: Token is expired
+                    status: 403
+                Get User Without X Token:
+                  value:
+                    error: true
+                    message: Not allowed without token.
+                    status: 403
+  /security/public-session:
+    get:
+      tags:
+        - Security
+      summary: Get Public KEY
+      description: Get Public KEY
+      operationId: getPublicKey
+      responses:
+        '200':
+          description: Get Public KEY
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: Origin, X-Requested-With, Content-Type, Accept, x-uid
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET, POST, OPTIONS, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '119'
+            Date:
+              schema:
+                type: string
+                example: Thu, 22 Feb 2024 10:09:00 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"77-ib7pW5rof8KqwNXQ8raWLWuhuLU"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      apiKey:
+                        type: string
+                        example: 68ABDBFB9AB9BD64
+                      sessionId:
+                        type: string
+                        example: MMSID20240222153900
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Success
+                  status:
+                    type: number
+                    example: 200
+              examples:
+                Get Public KEY:
+                  value:
+                    data:
+                      apiKey: 68ABDBFB9AB9BD64
+                      sessionId: MMSID20240222153900
+                    error: false
+                    message: Success
+                    status: 200
+  /security/check:
+    post:
+      tags:
+        - Security
+      summary: Check Session
+      description: Check Session
+      operationId: checkSession
+      responses:
+        '200':
+          description: ''
+  /security/x-token:
+    post:
+      tags:
+        - Security
+      summary: Get Token
+      description: Get Token
+      operationId: getToken
+      parameters:
+        - name: x-mm-signature
+          in: header
+          schema:
+            type: string
+            example: 9b2dce6782b7fa0e9c455b9a3a63016c43f90ab22846f3ab6ab8ad887c069755
+        - name: x-mm-package
+          in: header
+          schema:
+            type: string
+            example: app.mm.com
+        - name: x-mm-date
+          in: header
+          schema:
+            type: string
+            example: '2024-02-20T11:56:53.061Z'
+        - name: x-mm-session-id
+          in: header
+          schema:
+            type: string
+            example: MMSID20240220172614
+        - name: x-mm-csrf-key
+          in: header
+          schema:
+            type: string
+            example: DC9B4CB4D7705397
+      responses:
+        '200':
+          description: Get Token
+          headers:
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+                example: Origin, X-Requested-With, Content-Type, Accept, x-uid
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: GET, POST, OPTIONS, PUT, PATCH, DELETE
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '442'
+            Date:
+              schema:
+                type: string
+                example: Thu, 22 Feb 2024 10:10:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1ba-7JpSx0ciMtwXbYDwH6jAg8SwpQQ"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                        example: >-
+                          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQWdlbnQiOiJQb3N0bWFuUnVudGltZS83LjM2LjMiLCJkYXRlIjoiMjAyNC0wMi0yMlQxMDoxMDoxNS4yODhaIiwiZGV2aWNlIjoiVyIsInVpZCI6Im1jZWprNDZ3cyIsInNpZ25hdHVyZSI6IjI2M2Q4NDBlYzRjYTA5ZjMyZWFkNjc2NGM5M2Y0YTI5M2MxMDNiNTJjN2M2OWQ3ZDU1ZDRlYmExNjM3Y2RmMmUiLCJpYXQiOjE3MDg1OTY2MTUsImV4cCI6MTcwODYwMDIxNX0.hgRihc8RoFIv4g8NypwKTOTCOx1bQvpE2nk9W4cxh7A
+                  error:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: Success
+                  status:
+                    type: number
+                    example: 200
+              examples:
+                Get Token:
+                  value:
+                    data:
+                      accessToken: >-
+                        eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQWdlbnQiOiJQb3N0bWFuUnVudGltZS83LjM2LjMiLCJkYXRlIjoiMjAyNC0wMi0yMlQxMDoxMDoxNS4yODhaIiwiZGV2aWNlIjoiVyIsInVpZCI6Im1jZWprNDZ3cyIsInNpZ25hdHVyZSI6IjI2M2Q4NDBlYzRjYTA5ZjMyZWFkNjc2NGM5M2Y0YTI5M2MxMDNiNTJjN2M2OWQ3ZDU1ZDRlYmExNjM3Y2RmMmUiLCJpYXQiOjE3MDg1OTY2MTUsImV4cCI6MTcwODYwMDIxNX0.hgRihc8RoFIv4g8NypwKTOTCOx1bQvpE2nk9W4cxh7A
+                    error: false
+                    message: Success
+                    status: 200
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
+tags:
+  - name: Auth
+  - name: User
+  - name: Security
