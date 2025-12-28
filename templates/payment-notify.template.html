@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Purchase Confirmation</title>
+</head>
+<body style="font-family: Georgia, serif; margin: 0; padding: 0; background-color: #ffffff; color: #333333;">
+  <div style="width: 100%; max-width: 600px; margin: auto; padding: 40px 20px;">
+    <h1 style="font-size: 28px; margin-bottom: 10px; font-weight: normal;">
+      Thank you for unlocking <span style="font-style: italic;">opportunity</span> with us
+    </h1>
+
+    <p style="font-size: 16px; line-height: 1.6;">Hi {{user_name}},</p>
+
+    <p style="font-size: 16px; line-height: 1.6;">
+      We're excited to confirm your successful purchase. Below are the details of your transaction:
+    </p>
+
+    <table style="width: 100%; margin-top: 20px; font-size: 16px; border-collapse: collapse;">
+      <tr>
+        <td style="padding: 8px 0;"><strong>Program Name:</strong></td>
+        <td style="padding: 8px 0;">{{program_name}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0;"><strong>Access Duration:</strong></td>
+        <td style="padding: 8px 0;">{{program_duration}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0;"><strong>Purchase Date:</strong></td>
+        <td style="padding: 8px 0;">{{program_purchase_date}} </td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0;"><strong>Amount Paid:</strong></td>
+        <td style="padding: 8px 0;">${{program_amount}}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0;"><strong>Transaction ID:</strong></td>
+        <td style="padding: 8px 0;">{{transaction_id}} </td>
+      </tr>
+    </table>
+
+    <p style="font-size: 16px; line-height: 1.6;">
+      You can get started right away using the button below:
+    </p>
+
+    <a href="{{kordie_web_link}}" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f96c28; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 4px; font-family: Arial, sans-serif;">
+      Access My Program
+    </a>
+
+    <p style="font-size: 16px; line-height: 1.6;">
+      If you have any questions or need help, just reply to this email or reach out through our support center.
+    </p>
+
+    <p style="font-size: 16px; line-height: 1.6;">
+      Welcome aboard,<br>The Kordie Team
+    </p>
+
+    <div style="margin-top: 40px; font-size: 12px; color: #999999; text-align: center;">
+      © 2025 Kordie. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>

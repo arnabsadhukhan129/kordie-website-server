@@ -1,0 +1,27 @@
+env:
+ node: true
+ commonjs: true
+ es2023: true
+extends: eslint:recommended
+parserOptions:
+ ecmaVersion: latest
+rules: {
+   semi: ["error", "always"],
+   quotes: ["error", "single", { "allowTemplateLiterals": true }],
+   no-unused-vars: "warn",
+   no-console: "warn",
+   no-undef: "error",
+   eqeqeq: "error",
+   no-invalid-this: "error",
+   no-return-assign: "error",
+   no-unused-expressions: ["error", { "allowTernary": true }],
+   no-useless-concat: "error",
+   no-useless-return: "error",
+   no-constant-condition: "warn",
+   indent: ["error", 2, { "SwitchCase": 1 }],
+   no-mixed-spaces-and-tabs: "warn",
+   space-before-blocks: "warn",
+   space-in-parens: "warn",
+   space-infix-ops: "warn",
+   space-unary-ops: "warn",
+}
